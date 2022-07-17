@@ -1,0 +1,183 @@
+-- Afisati numele, prenumele, mail.ul si daca salariul este peste media salariilor,al profesorului care are cei mai multi participanti la un club, altfel se afiseaza un mesaj constrar
+
+
+SELECT p.NUME , p.PRENUME , p.MAIL, p.SALARIU,
+CASE
+
+    WHEN p.SALARIU > (SELECT AVG(SALARIU) FROM CADRU_DIDACTIC) THEN 'Salariul este peste medie'
+	ELSE 'Salariul nu este peste medie'
+
+END AS 'SalariuText'
+FROM CADRU_DIDACTIC p
+WHERE p.COD_CADRU_DIDACTIC IN 
+(SELECT COD_CADRU_DIDACTIC FROM CLUB
+WHERE CLUB.COD_CLUB=(SELECT TOP 1 COD_CLUB 
+FROM INSCRIERE_CLUB
+GROUP BY COD_CLUB
+ORDER BY COUNT(*) DESC))
+
+
+
+-- Sa se afiseze in ordine crescatoare dupa nume elevii din ciclul primar nascuti in anul 2017 si 2014
+
+
+SELECT ELEV.NUME, ELEV.PRENUME, ELEV.DATA_NASTERII FROM ELEV
+INNER JOIN CLASA ON
+ELEV.COD_CLASA = CLASA.COD_CLASA
+INNER JOIN GENERATIE ON
+CLASA.COD_GENERATIE=GENERATIE.COD_GENERATIE
+INNER JOIN CICLU ON
+GENERATIE.COD_CICLU=CICLU.COD_CICLU
+WHERE CICLU.COD_CICLU=(SELECT COD_CICLU FROM CICLU WHERE DENUMIRE='Primar') AND (YEAR(ELEV.DATA_NASTERII)=2017 OR YEAR(ELEV.DATA_NASTERII)=2014)
+ORDER BY NUME, PRENUME
+
+
+
+-- Sa se afiseze numele, prenumele si salariu profesorilor care au salariul peste medie si care predau la clasa 5B
+
+
+WITH profesori(AvgSalariu) as
+(SELECT AVG(SALARIU) FROM CADRU_DIDACTIC)
+SELECT NUME, PRENUME, SALARIU
+FROM CADRU_DIDACTIC, profesori
+WHERE CADRU_DIDACTIC.SALARIU > profesori.AvgSalariu AND CADRU_DIDACTIC.COD_CADRU_DIDACTIC IN(SELECT COD_CADRU_DIDACTIC FROM ORAR WHERE COD_CLASA= (SELECT COD_CLASA FROM CLASA WHERE DENUMIRE='5B'))
+
+
+
+
+-- Afisati ciclul care are clase ce-si desfasoara orele in laboratorul de chimie
+
+SELECT DISTINCT CONCAT(CONCAT('Generatia claselor din ciclul ', CL.DENUMIRE), ' are cursuri in Laboratorul de Chimie') as 'Rezultat'
+FROM CICLU cl, GENERATIE g, CLASA c, ORAR o, SALA s
+WHERE cl.COD_CICLU=g.COD_CICLU AND g.COD_GENERATIE=c.COD_GENERATIE AND c.COD_CLASA=o.COD_CLASA AND O.COD_SALA=s.COD_SALA AND UPPER(s.DENUMIRE) LIKE UPPER('Laborator Chimie')
+
+
+
+-- Afisati numele cluburilor care organizeaza concursuri in luna aprilie
+
+SELECT cl.DENUMIRE AS 'Denumire Club'
+FROM CLUB cl
+INNER JOIN CONCURS ON
+cl.COD_CLUB=CONCURS.COD_CONCURS
+WHERE MONTH(CONCURS.DATA_DESFASURARE)=4
+
+
+
+-- Dublati salariuL cadrelor_didactice care au organizat cel putin un club
+
+UPDATE CADRU_DIDACTIC
+SET SALARIU=SALARIU*2
+WHERE COD_CADRU_DIDACTIC IN (SELECT COD_CADRU_DIDACTIC FROM CLUB)
+
+-- Modificati orarul astfel incat toate orele clasei 5B mai putin cele de biologie, fizica, chimie, informatica si sport sa se desfasoare la sala 13
+
+UPDATE ORAR
+SET COD_SALA=13
+WHERE COD_CLASA=(SELECT COD_CLASA FROM CLASA WHERE DENUMIRE='5B') 
+AND COD_SALA NOT IN (SELECT COD_SALA FROM SALA WHERE DENUMIRE IS NOT NULL)
+
+-- Mariti cu 1 punct nota elevilor care au luat cel mult 9 la testul ce are codul 2
+
+UPDATE SUSTINE_EVALUARE
+SET NOTA = NOTA+1
+WHERE COD_EVALUARE=2 AND NOTA<=9
+
+
+
+
+-- Secventa creare 
+
+
+CREATE SEQUENCE SEQ_increment
+INCREMENT BY 50
+START WITH 2800
+MAXVALUE 3500
+CYCLE
+
+
+INSERT INTO CADRU_DIDACTIC VALUES ('Popescu', 'Alex', 'popescualex@gamil.com', '0725567233', 'Strada Lalelelor 12', 'M', 'Chimie-Fizica', NEXT VALUE FOR SEQ_increment)
+
+INSERT INTO CADRU_DIDACTIC VALUES ('Lupu', 'Ana', 'lupuana@gamil.com', '0718989456', 'Aleea Resita 5', 'F', 'Invatator', NEXT VALUE FOR SEQ_increment)
+
+INSERT INTO CADRU_DIDACTIC VALUES ('Hang', 'Ionel', 'hangionel@gamil.com', '0745676554', 'Strada Crizantemelor 17', 'M', 'Matematica-Informatica', NEXT VALUE FOR SEQ_increment)
+
+INSERT INTO CADRU_DIDACTIC VALUES ('Florin', 'Marcel', 'florinmarcel@gamil.com', '0756757552', 'Aleea Livezii 8', 'M', 'Istorie', NEXT VALUE FOR SEQ_increment)
+
+INSERT INTO CADRU_DIDACTIC VALUES ('Olteanu', 'Dragos', 'olteanudragos@gamil.com', '0743654653', 'Bulevardul Budapesta 9', 'M', 'Geografie', NEXT VALUE FOR SEQ_increment)
+
+
+
+
+
+-- O vizualizare ce afiseaza numarul de cadre didactice organizatoare de club ce au salariul intre 2000 si 3000, respectiv peste 3000
+
+GO
+CREATE VIEW [Profesori cu salariu in intervalul 2000-3000 si peste 3000] AS
+SELECT COUNT(*) AS 'Profesori organizatori'
+FROM CADRU_DIDACTIC
+WHERE CADRU_DIDACTIC.COD_CADRU_DIDACTIC IN (SELECT COD_CADRU_DIDACTIC FROM CLUB)
+GROUP BY SALARIU/1000
+GO
+
+
+SELECT * FROM [Profesori cu salariu in intervalul 2000-3000 si peste 3000]
+
+
+--Operatie LMD care nu merge
+
+DELETE FROM [Profesori cu salariu in intervalul 2000-3000 si peste 3000]
+WHERE [Profesori organizatori]<4
+
+--Operatie LMD care merge
+
+SELECT * FROM [Profesori cu salariu in intervalul 2000-3000 si peste 3000]
+WHERE [Profesori organizatori]> 4
+
+
+
+
+-- Sa se afiseze profesorii care au ore la clasa a 5 a
+
+SELECT * FROM CADRU_DIDACTIC p
+WHERE NOT EXISTS(
+	SELECT COD_CLASA 
+	FROM ORAR
+	WHERE p.COD_CADRU_DIDACTIC=COD_CADRU_DIDACTIC
+	EXCEPT
+	SELECT COD_CLASA
+	FROM CLASA 
+	WHERE DENUMIRE LIKE '5%')
+
+SELECT * FROM ORAR
+
+
+-- Sa se afiseze elevii care au sustinut evaluarea cu codul 11 
+SELECT * FROM SUSTINE_EVALUARE
+
+
+SELECT * 
+FROM ELEV e
+WHERE NOT EXISTS(
+(SELECT COD_EVALUARE
+FROM SUSTINE_EVALUARE
+WHERE e.COD_ELEV=COD_ELEV)
+EXCEPT
+(SELECT COD_EVALUARE
+FROM EVALUARE
+WHERE COD_EVALUARE=11))
+
+
+-- returnati pentru fiecare elev numele, prenumele, forma evaluarii si numele materiei
+
+SELECT e.NUME, e.PRENUME, f.MODALITATE AS 'Forma evaluare', m.DENUMIRE AS 'Materie'
+FROM ELEV e RIGHT OUTER JOIN SUSTINE_EVALUARE ev ON (ev.COD_EVALUARE=e.COD_ELEV) 
+LEFT OUTER JOIN EVALUARE f ON (ev.COD_EVALUARE= f.COD_EVALUARE) 
+FULL OUTER JOIN MATERIE m ON (m.COD_MATERIE=f.COD_MATERIE)
+
+
+--returnati numarul de ore desfasurate intr-o sala
+
+SELECT s.COD_SALA, ISNULL(COUNT(o.COD_SALA),0) AS 'Numar ore'
+FROM SALA s LEFT OUTER JOIN ORAR o ON (s.COD_SALA = o.COD_SALA)
+GROUP BY s.COD_SALA
+

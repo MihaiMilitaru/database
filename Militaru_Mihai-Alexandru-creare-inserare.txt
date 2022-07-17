@@ -1,0 +1,1464 @@
+........................................................CICLU....................................................................
+
+CREATE TABLE CICLU(COD_CICLU INT IDENTITY(1,1) CONSTRAINT PKEY_CICLU PRIMARY KEY, DENUMIRE VARCHAR(50) CONSTRAINT DENUMIRE_CICLU NOT NULL)
+
+INSERT INTO CICLU VALUES ('Primar')
+
+INSERT INTO CICLU VALUES ('Gimnaziu')
+
+
+
+
+
+........................................................GENERATIE.................................................................
+
+CREATE TABLE GENERATIE(COD_GENERATIE INT IDENTITY(1,1) CONSTRAINT PKEY_GENERATIE PRIMARY KEY, DENUMIRE VARCHAR(50) CONSTRAINT DENUMIRE_GENERATIE NOT NULL, COD_CICLU INT, CONSTRAINT FK_GENERATIE FOREIGN KEY(COD_CICLU) REFERENCES CICLU(COD_CICLU) )
+
+INSERT INTO GENERATIE VALUES('CLASA 0', 1)
+
+INSERT INTO GENERATIE VALUES('CLASA 1', 1)
+
+INSERT INTO GENERATIE VALUES('CLASA 2', 1)
+
+INSERT INTO GENERATIE VALUES('CLASA 3', 1)
+
+INSERT INTO GENERATIE VALUES('CLASA 4', 1)
+
+INSERT INTO GENERATIE VALUES('CLASA 5', 2)
+
+INSERT INTO GENERATIE VALUES('CLASA 6', 2)
+
+INSERT INTO GENERATIE VALUES('CLASA 7', 2)
+
+INSERT INTO GENERATIE VALUES('CLASA 8', 2)
+
+
+
+
+
+.........................................................CLASA......................................................................
+
+CREATE TABLE CLASA(COD_CLASA INT IDENTITY(1,1) CONSTRAINT PKEY_CLASA PRIMARY KEY, DENUMIRE VARCHAR(50) CONSTRAINT DENUMIRE_CLASA NOT NULL, COD_GENERATIE INT, CONSTRAINT FK_CLASA FOREIGN KEY(COD_GENERATIE) REFERENCES GENERATIE(COD_GENERATIE) )
+
+INSERT INTO CLASA VALUES('0A', 1)
+
+INSERT INTO CLASA VALUES('0B', 1)
+
+INSERT INTO CLASA VALUES('0C', 1)
+
+INSERT INTO CLASA VALUES('0D', 1)
+
+
+INSERT INTO CLASA VALUES('1A', 2)
+
+INSERT INTO CLASA VALUES('1B', 2)
+
+INSERT INTO CLASA VALUES('1C', 2)
+
+INSERT INTO CLASA VALUES('1D', 2)
+
+
+
+INSERT INTO CLASA VALUES('2A', 3)
+
+INSERT INTO CLASA VALUES('2B', 3)
+
+INSERT INTO CLASA VALUES('2C', 3)
+
+INSERT INTO CLASA VALUES('2D', 3)
+
+
+INSERT INTO CLASA VALUES('3A', 4)
+
+INSERT INTO CLASA VALUES('3B', 4)
+
+INSERT INTO CLASA VALUES('3C', 4)
+
+INSERT INTO CLASA VALUES('3D', 4)
+
+
+INSERT INTO CLASA VALUES('4A', 5)
+
+INSERT INTO CLASA VALUES('4B', 5)
+
+INSERT INTO CLASA VALUES('4C', 5)
+
+INSERT INTO CLASA VALUES('4D', 5)
+
+
+INSERT INTO CLASA VALUES('5A', 6)
+
+INSERT INTO CLASA VALUES('5B', 6)
+
+INSERT INTO CLASA VALUES('5C', 6)
+
+INSERT INTO CLASA VALUES('5D', 6)
+
+
+INSERT INTO CLASA VALUES('6A', 7)
+
+INSERT INTO CLASA VALUES('6B', 7)
+
+INSERT INTO CLASA VALUES('6C', 7)
+
+INSERT INTO CLASA VALUES('6D', 7)
+
+
+INSERT INTO CLASA VALUES('7A', 8)
+
+INSERT INTO CLASA VALUES('7B', 8)
+
+INSERT INTO CLASA VALUES('7C', 8)
+
+INSERT INTO CLASA VALUES('7D', 8)
+
+
+INSERT INTO CLASA VALUES('8A', 9)
+
+INSERT INTO CLASA VALUES('8B', 9)
+
+INSERT INTO CLASA VALUES('8C', 9)
+
+INSERT INTO CLASA VALUES('8D', 9)
+
+
+
+
+..........................................................ELEV................................................................
+
+
+CREATE TABLE ELEV(COD_ELEV INT IDENTITY(1,1) CONSTRAINT PKEY_ELEV PRIMARY KEY, NUME VARCHAR(100) CONSTRAINT NUME_ELEV NOT NULL, PRENUME VARCHAR(100) CONSTRAINT PRENUME_ELEV NOT NULL, DATA_NASTERII DATE CONSTRAINT DATA_NASTERII_CONST NOT NULL, SEX VARCHAR(10) CONSTRAINT SEX_CONST NOT NULL, MAIL VARCHAR(75) UNIQUE, NUMAR_TELEFON VARCHAR(20) CONSTRAINT TELEFON_ELEV NOT NULL, NATIONALITATE VARCHAR(30) CONSTRAINT NAT_CONST NOT NULL, ADRESA VARCHAR(100) CONSTRAINT ADRESA_ELEV NOT NULL, COD_CLASA INT, CONSTRAINT FK_ELEV FOREIGN KEY(COD_CLASA) REFERENCES CLASA(COD_CLASA))
+
+INSERT INTO ELEV VALUES('Stefan', 'Remus', '2017-02-03', 'M', 'stefanremus@gamil.com', '0744200258', 'Bulevardul Camil Ressu 1', 21)
+
+INSERT INTO ELEV VALUES('Muresan', 'Ciprian', '2017-04-05', 'M', 'muresanciprian@gamil.com', '0717289968', 'Splaiul Unirii, Nr. 459', 21)
+
+INSERT INTO ELEV VALUES('Cosovei', 'Costica', '2017-01-23', 'M', 'cosoveicostica@gamil.com', '0734353545', '50B Calea Dorobantilor Street', 21)
+
+INSERT INTO ELEV VALUES('Ilie', 'Petru', '2017-10-03', 'M', 'petruilie@gamil.com', '0788677838', 'Calea Victoriei 41', 21)
+
+INSERT INTO ELEV VALUES('Tudor', 'Valentin', '2017-07-31', 'M', 'tudorvalentin@gamil.com', '0723784567', 'Bulevardul Dimitrie Cantemir 123', 21)
+
+INSERT INTO ELEV VALUES('Mircea', 'Anca', '2017-11-16', 'F', 'mirceaanca@gamil.com', '0723785631', 'Sebe Nicolae Soldat, nr. 16', 21)
+
+INSERT INTO ELEV VALUES('Moscovici', 'Adriana', '2017-05-03', 'F', 'moscoviciadriana@gamil.com', '0767678998', 'Bulevardul Expozitiei 2', 21)
+
+INSERT INTO ELEV VALUES('Cosmescu', 'Paula', '2017-12-06', 'F', 'cosmescupaula@gamil.com', '0712567823', 'Calea Rahovei nr 321', 21)
+
+
+
+
+
+
+
+INSERT INTO ELEV VALUES('Hasdeu', 'Ion', '2017-09-03', 'M', 'ionhasdeu@gamil.com', '0737562856', 'Soseaua Virtutii 1A', 22)
+
+INSERT INTO ELEV VALUES('Iagar', 'Victor', '2017-10-05', 'M', 'iagarvictor@gamil.com', '0789453627', 'Strada Paul Greceanu', 22)
+
+INSERT INTO ELEV VALUES('Iacobescu', 'Costin', '2017-02-21', 'M', 'iacobescucostin@gamil.com', '0737893456', 'Aleea Istru Nr. 5', 22)
+
+INSERT INTO ELEV VALUES('Zamfir', 'Tiberiu', '2017-05-06', 'M', 'zamfirtiberiu@gamil.com', '0790349078', 'Drumul Intre Tarlale 42', 22)
+
+INSERT INTO ELEV VALUES('Nemes', 'Mihaela', '2017-08-30', 'F', 'nemesmihaela@gamil.com', '0754326709', 'Drumul Intre Tarlale 42', 22)
+
+INSERT INTO ELEV VALUES('Lupescu', 'Mara', '2017-09-16', 'F', 'lupescumara@gamil.com', '0712734023', 'Drumul Balta Doamnei 44', 22)
+
+INSERT INTO ELEV VALUES('Popescu', 'Claudia', '2017-03-03', 'F', 'popescuclaudia@gamil.com', '0766545410', 'Bulevardul Pache Protopopescu 9', 22)
+
+INSERT INTO ELEV VALUES('Ionescu', 'Ana', '2017-10-06', 'F', 'ionescuana@gamil.com', '0723088761', 'Bulevardul Timisoara', 22)
+
+
+
+
+
+
+
+INSERT INTO ELEV VALUES('Moculescu', 'Adam', '2016-10-03', 'M', 'moculescuadam@gamil.com', '0724589010', 'Calea Vitan 55', 27)
+
+INSERT INTO ELEV VALUES('Mihail', 'Sorin', '2016-07-05', 'M', 'mihailsoringamil.com', '0710293846', 'Soseaua Oltenitei 115', 27)
+
+INSERT INTO ELEV VALUES('Plesu', 'Manuel', '2016-03-17', 'M', 'plesumanuel@gamil.com', '0728475612', 'Calea Mosilor 12', 27)
+
+INSERT INTO ELEV VALUES('Urzica', 'Mara', '2016-11-06', 'F', 'urzicamara@gamil.com', '0738903645', 'Strada Poenaru Bordea 2', 27)
+
+INSERT INTO ELEV VALUES('Poenaru', 'Andreea', '2016-09-30', 'F', 'poenaruandreea@gamil.com', '0747892646', 'Strada Constantinescu Alexandru 33', 27)
+
+INSERT INTO ELEV VALUES('Popa', 'Adela', '2016-10-16', 'F', 'popaadela@gamil.com', '0700123789', 'Bulevardul Energeticienilor 4', 27)
+
+INSERT INTO ELEV VALUES('Negoitescu', 'Denisa', '2016-05-11', 'F', 'negoitescudenisa@gamil.com', '0733895617', 'Calea Floreasca 11', 27)
+
+INSERT INTO ELEV VALUES('Breban', 'Simona', '2017-04-06', 'F', 'brebansimona@gamil.com', '0744890456', 'Calea Vacaresti 39', 27)
+
+
+
+
+
+INSERT INTO ELEV VALUES('Romanescu', 'Danut', '2016-07-03', 'M', 'romanescudanut@gamil.com', '0727467890', 'Calea Vitan 55', 27)
+
+INSERT INTO ELEV VALUES('Cretu', 'Iulian', '2016-05-02', 'M', 'cretuiulian@.com', '0710102745', 'Soseaua Oltenitei 115', 27)
+
+INSERT INTO ELEV VALUES('Randa', 'Vlad', '2016-03-17', 'M', 'randavlad@gamil.com', '0759472759', 'Calea Mosilor 12', 27)
+
+INSERT INTO ELEV VALUES('Georghiou', 'Toma', '2016-08-16', 'M', 'gheorghiutoma@gamil.com', '0718462441', 'Strada Poenaru Bordea 2', 27)
+
+INSERT INTO ELEV VALUES('Dumitrescu', 'Rares', '2016-09-21', 'M', 'dumitrescurares@gamil.com', '0759375690', 'Strada Constantinescu Alexandru 33', 27)
+
+INSERT INTO ELEV VALUES('Rosetti', 'Andreea', '2016-08-16', 'F', 'rosettiandreea@gamil.com', '0722998367', 'Bulevardul Energeticienilor 4', 27)
+
+INSERT INTO ELEV VALUES('Vladu', 'Ioana', '2016-06-11', 'F', 'vladuioana@gamil.com', '0719372756', 'Calea Floreasca 11', 27)
+
+INSERT INTO ELEV VALUES('Caragiale', 'Eliza', '2017-04-06', 'F', 'caragialeeliza@gamil.com', '0722778345', 'Calea Vacaresti 39', 27)
+
+
+
+
+
+
+INSERT INTO ELEV VALUES('Lupescu', 'Lucian', '2014-08-03', 'M', 'lupesculucian@gamil.com', '0745782389', 'Strada Borsa 27', 35)
+
+INSERT INTO ELEV VALUES('Mocanu', 'Valeriu', '2014-05-07', 'M', 'mocanuvaleriu@gamil.com', '0728512344', 'Bulevardul Dimitrie Cantemir 9', 35)
+
+INSERT INTO ELEV VALUES('Mocanu', 'George', '2014-05-07', 'M', 'mocanugeorge@gamil.com', '0795592345', 'Piata Romana 9', 35)
+
+INSERT INTO ELEV VALUES('Catargiu', 'Cosmin', '2014-10-16', 'M', 'catargiucosmin@gamil.com', '0789987766', 'Intrarea Torentului, nr 17', 35)
+
+INSERT INTO ELEV VALUES('Rusu', 'Octavian', '2014-05-21', 'M', 'rusuoctavian@gamil.com', '0711209056', 'Bulevardul Iuliu Maniu 12', 35)
+
+INSERT INTO ELEV VALUES('Presecan', 'Flaviu', '2014-08-11', 'F', 'prescanflaviu@gamil.com', '0723789900', 'Strada Turnu Magurele 9', 35)
+
+INSERT INTO ELEV VALUES('Barbu', 'Elena', '2014-07-11', 'F', 'barbuelena@gamil.com', '0718882332', 'Strada Sfantul Stefan 13', 35)
+
+INSERT INTO ELEV VALUES('Toma', 'Cristina', '2014-02-06', 'F', 'tomacristina@gamil.com', '0733449012', 'Bulevardul Dinicu Golescu 38', 35)
+
+
+
+
+
+..............................................................TUTORE.....................................................................
+
+
+CREATE TABLE TUTORE(COD_TUTORE INT IDENTITY(1,1) CONSTRAINT PKEY_TUTORE PRIMARY KEY, NUME VARCHAR(100) CONSTRAINT NUME_TUTORE NOT NULL, PRENUME VARCHAR(100) CONSTRAINT PRENUME_TUTORE NOT NULL, DATA_NASTERII DATE CONSTRAINT DATA_NASTERII_CONST NOT NULL, SEX VARCHAR(10) CONSTRAINT SEX_CONST NOT NULL, MAIL VARCHAR(75) UNIQUE CONSTRAINT MAIL_TUTORE NOT NULL, NUMAR_TELEFON VARCHAR(20) UNIQUE CONSTRAINT TELEFON_ELEV NOT NULL,  ADRESA VARCHAR(100) CONSTRAINT ADRESA_TUTORE NOT NULL)
+
+INSERT INTO TUTORE VALUES ('Stefan', 'Ovidiu', '1972-1-17', 'M', 'stefanovidiu@gamil.com', '0741640483', 'Bulevardul Camil Ressu 1')
+INSERT INTO TUTORE VALUES ('Stefan', 'Antonia', '1975-5-19', 'F', 'stefanantonia@gamil.com', '0771138887', 'Bulevardul Camil Ressu 1')
+
+
+
+
+INSERT INTO TUTORE VALUES ('Muresan', 'Gheorghe', '1972-6-14', 'M', 'muresangheorghe@gamil.com', '0766568025', 'Splaiul Unirii, Nr. 459')
+INSERT INTO TUTORE VALUES ('Muresan', 'Alexandra', '1973-3-1', 'F', 'muresanalexandra@gamil.com', '0778047275', 'Splaiul Unirii, Nr. 459')
+
+
+
+
+INSERT INTO TUTORE VALUES ('Cosovei', 'Gheorghe', '1978-2-12', 'M', 'cosoveigheorghe@gamil.com', '0746823827', '50B Calea Dorobantilor Street')
+INSERT INTO TUTORE VALUES ('Cosovei', 'Silvia', '1978-3-19', 'F', 'cosoveisilvia@gamil.com', '0725010747', '50B Calea Dorobantilor Street')
+
+
+
+
+INSERT INTO TUTORE VALUES ('Ilie', 'Adrian', '1973-8-21', 'M', 'ilieadrian@gamil.com', '0741014830', 'Calea Victoriei 41')
+INSERT INTO TUTORE VALUES ('Ilie', 'Ioana', '1979-3-26', 'F', 'ilieioana@gamil.com', '0718051326', 'Calea Victoriei 41')
+
+
+
+
+INSERT INTO TUTORE VALUES ('Tudor', 'Bogdan', '1976-6-5', 'M', 'tudorbogdan@gamil.com', '0723361365', 'Bulevardul Dimitrie Cantemir 123')
+INSERT INTO TUTORE VALUES ('Tudor', 'Andra', '1977-9-23', 'F', 'tudorandra@gamil.com', '0766324866', 'Bulevardul Dimitrie Cantemir 123')
+
+
+
+
+INSERT INTO TUTORE VALUES ('Mircea', 'Costache', '1972-2-18', 'M', 'mirceacostache@gamil.com', '0773418063', 'Sebe Nicolae Soldat, nr. 16')
+INSERT INTO TUTORE VALUES ('Mircea', 'Stefania', '1979-4-18', 'F', 'mirceastefania@gamil.com', '0784046364', 'Sebe Nicolae Soldat, nr. 16')
+
+
+
+
+INSERT INTO TUTORE VALUES ('Moscovici', 'Ovidiu', '1971-8-4', 'M', 'moscoviciovidiu@gamil.com', '0714445641', 'Bulevardul Expozitiei 2')
+INSERT INTO TUTORE VALUES ('Moscovici', 'Camelia', '1979-9-26', 'F', 'moscovicicamelia@gamil.com', '0703703666', 'Bulevardul Expozitiei 2')
+
+
+
+
+INSERT INTO TUTORE VALUES ('Cosmescu', 'Marius', '1978-10-22', 'M', 'cosmescumarius@gamil.com', '0725607762', 'Calea Rahovei nr 321')
+INSERT INTO TUTORE VALUES ('Cosmescu', 'Silvia', '1974-1-17', 'F', 'cosmescusilvia@gamil.com', '0722655336', 'Calea Rahovei nr 321')
+
+
+
+
+INSERT INTO TUTORE VALUES ('Hasdeu', 'Gheorghe', '1974-7-10', 'M', 'hasdeugheorghe@gamil.com', '0747373836', 'Soseaua Virtutii 1A')
+INSERT INTO TUTORE VALUES ('Hasdeu', 'Mihaela', '1971-9-13', 'F', 'hasdeumihaela@gamil.com', '0735677332', 'Soseaua Virtutii 1A')
+
+
+
+
+INSERT INTO TUTORE VALUES ('Iagar', 'Manuel', '1979-7-15', 'M', 'iagarmanuel@gamil.com', '0761254023', 'Strada Paul Greceanu')
+INSERT INTO TUTORE VALUES ('Iagar', 'Ana', '1974-1-13', 'F', 'iagarana@gamil.com', '0731446108', 'Strada Paul Greceanu')
+
+
+
+
+INSERT INTO TUTORE VALUES ('Iacobescu', 'Razvan', '1976-9-3', 'M', 'iacobescurazvan@gamil.com', '0723131341', 'Aleea Istru Nr. 5')
+INSERT INTO TUTORE VALUES ('Iacobescu', 'Silvia', '1975-6-10', 'F', 'iacobescusilvia@gamil.com', '0713860632', 'Aleea Istru Nr. 5')
+
+
+
+
+INSERT INTO TUTORE VALUES ('Zamfir', 'Horia', '1973-8-18', 'M', 'zamfirhoria@gamil.com', '0764715887', 'Drumul Intre Tarlale 42')
+INSERT INTO TUTORE VALUES ('Zamfir', 'Andra', '1974-10-15', 'F', 'zamfirandra@gamil.com', '0781071300', 'Drumul Intre Tarlale 42')
+
+
+
+
+INSERT INTO TUTORE VALUES ('Nemes', 'Lucian', '1972-12-1', 'M', 'nemeslucian@gamil.com', '0733674773', 'Drumul Intre Tarlale 42')
+INSERT INTO TUTORE VALUES ('Nemes', 'Ana', '1971-5-11', 'F', 'nemesana@gamil.com', '0712148568', 'Drumul Intre Tarlale 42')
+
+
+
+
+INSERT INTO TUTORE VALUES ('Popescu', 'Dan', '1973-9-16', 'M', 'popescudan@gamil.com', '0722745772', 'Bulevardul Pache Protopopescu 9')
+INSERT INTO TUTORE VALUES ('Popescu', 'Ana', '1975-1-5', 'F', 'popescuana@gamil.com', '0732257032', 'Bulevardul Pache Protopopescu 9')
+
+
+
+
+INSERT INTO TUTORE VALUES ('Ionescu', 'Gheorghe', '1978-4-27', 'M', 'ionescugheorghe@gamil.com', '0767555271', 'Bulevardul Timisoara')
+INSERT INTO TUTORE VALUES ('Ionescu', 'Ana', '1973-2-27', 'F', 'ionescuana@gamil.com', '0776051418', 'Bulevardul Timisoara')
+
+
+
+
+INSERT INTO TUTORE VALUES ('Moculescu', 'Dan', '1971-5-11', 'M', 'moculescudan@gamil.com', '0745555731', 'Calea Vitan 55')
+INSERT INTO TUTORE VALUES ('Moculescu', 'Antonia', '1972-3-15', 'F', 'moculescuantonia@gamil.com', '0708823348', 'Calea Vitan 55')
+
+
+
+
+INSERT INTO TUTORE VALUES ('Mihail', 'Horia', '1974-11-15', 'M', 'mihailhoria@gamil.com', '0767876127', 'Soseaua Oltenitei 115')
+INSERT INTO TUTORE VALUES ('Mihail', 'Alina', '1979-8-3', 'F', 'mihailalina@gamil.com', '0717018583', 'Soseaua Oltenitei 115')
+
+
+
+
+INSERT INTO TUTORE VALUES ('Plesu', 'Mihai', '1975-12-10', 'M', 'plesumihai@gamil.com', '0774832221', 'Calea Mosilor 12')
+INSERT INTO TUTORE VALUES ('Plesu', 'Maria', '1971-7-25', 'F', 'plesumaria@gamil.com', '0722476744', 'Calea Mosilor 12')
+
+
+
+
+INSERT INTO TUTORE VALUES ('Urzica', 'Mircea', '1973-2-8', 'M', 'urzicamircea@gamil.com', '0736436658', 'Strada Poenaru Bordea 2')
+INSERT INTO TUTORE VALUES ('Urzica', 'Antonia', '1973-5-16', 'F', 'urzicaantonia@gamil.com', '0760344183', 'Strada Poenaru Bordea 2')
+
+
+
+
+INSERT INTO TUTORE VALUES ('Poenaru', 'Horia', '1977-11-10', 'M', 'poenaruhoria@gamil.com', '0734102482', 'Strada Constantinescu Alexandru 33')
+INSERT INTO TUTORE VALUES ('Poenaru', 'Alina', '1975-10-13', 'F', 'poenarualina@gamil.com', '0716054114', 'Strada Constantinescu Alexandru 33')
+
+
+
+
+INSERT INTO TUTORE VALUES ('Popa', 'Adrian', '1973-6-16', 'M', 'popaadrian@gamil.com', '0756784448', 'Bulevardul Energeticienilor 4')
+INSERT INTO TUTORE VALUES ('Popa', 'Alexandra', '1978-7-25', 'F', 'popaalexandra@gamil.com', '0770535541', 'Bulevardul Energeticienilor 4')
+
+
+
+
+INSERT INTO TUTORE VALUES ('Negoitescu', 'Dan', '1979-3-26', 'M', 'negoitescudan@gamil.com', '0731548883', 'Calea Floreasca 11')
+INSERT INTO TUTORE VALUES ('Negoitescu', 'Antonia', '1973-8-12', 'F', 'negoitescuantonia@gamil.com', '0754545564', 'Calea Floreasca 11')
+
+
+
+
+INSERT INTO TUTORE VALUES ('Breban', 'Mircea', '1975-2-26', 'M', 'brebanmircea@gamil.com', '0714781371', 'Calea Vacaresti 39')
+INSERT INTO TUTORE VALUES ('Breban', 'Antonia', '1971-6-23', 'F', 'brebanantonia@gamil.com', '0705351215', 'Calea Vacaresti 39')
+
+
+
+
+INSERT INTO TUTORE VALUES ('Romanescu', 'Costache', '1975-10-24', 'M', 'romanescucostache@gamil.com', '0782104767', 'Calea Vitan 55')
+INSERT INTO TUTORE VALUES ('Romanescu', 'Dana', '1974-4-25', 'F', 'romanescudana@gamil.com', '0714608574', 'Calea Vitan 55')
+
+
+
+
+INSERT INTO TUTORE VALUES ('Cretu', 'Alin', '1975-3-27', 'M', 'cretualin@gamil.com', '0725333420', 'Soseaua Oltenitei 115')
+INSERT INTO TUTORE VALUES ('Cretu', 'Antonia', '1973-11-23', 'F', 'cretuantonia@gamil.com', '0746700825', 'Soseaua Oltenitei 115')
+
+
+
+
+INSERT INTO TUTORE VALUES ('Randa', 'Horia', '1977-9-4', 'M', 'randahoria@gamil.com', '0778576112', 'Calea Mosilor 12')
+INSERT INTO TUTORE VALUES ('Randa', 'Andra', '1975-9-13', 'F', 'randaandra@gamil.com', '0724055481', 'Calea Mosilor 12')
+
+
+
+
+INSERT INTO TUTORE VALUES ('Georghiou', 'Horia', '1975-6-22', 'M', 'georghiouhoria@gamil.com', '0757658507', 'Strada Poenaru Bordea 2')
+INSERT INTO TUTORE VALUES ('Georghiou', 'Miruna', '1978-9-11', 'F', 'georghioumiruna@gamil.com', '0768480844', 'Strada Poenaru Bordea 2')
+
+
+
+
+INSERT INTO TUTORE VALUES ('Dumitrescu', 'Marius', '1974-8-27', 'M', 'dumitrescumarius@gamil.com', '0748635152', 'Strada Constantinescu Alexandru 33')
+INSERT INTO TUTORE VALUES ('Dumitrescu', 'Alexandra', '1975-3-18', 'F', 'dumitrescualexandra@gamil.com', '0788702883', 'Strada Constantinescu Alexandru 33')
+
+
+
+
+INSERT INTO TUTORE VALUES ('Rosetti', 'Lucian', '1973-5-26', 'M', 'rosettilucian@gamil.com', '0781435511', 'Bulevardul Energeticienilor 4')
+INSERT INTO TUTORE VALUES ('Rosetti', 'Alexandra', '1972-7-17', 'F', 'rosettialexandra@gamil.com', '0700105254', 'Bulevardul Energeticienilor 4')
+
+
+
+
+INSERT INTO TUTORE VALUES ('Vladu', 'Mihai', '1975-3-25', 'M', 'vladumihai@gamil.com', '0768042032', 'Calea Floreasca 11')
+INSERT INTO TUTORE VALUES ('Vladu', 'Miruna', '1974-5-3', 'F', 'vladumiruna@gamil.com', '0751475660', 'Calea Floreasca 11')
+
+
+
+
+INSERT INTO TUTORE VALUES ('Caragiale', 'Marius', '1978-1-8', 'M', 'caragialemarius@gamil.com', '0744363458', 'Calea Vacaresti 39')
+INSERT INTO TUTORE VALUES ('Caragiale', 'Stefania', '1972-5-11', 'F', 'caragialestefania@gamil.com', '0786411213', 'Calea Vacaresti 39')
+
+
+
+
+INSERT INTO TUTORE VALUES ('Lupescu', 'Gabriel', '1972-9-9', 'M', 'lupescugabriel@gamil.com', '0748345857', 'Strada Borsa 27')
+INSERT INTO TUTORE VALUES ('Lupescu', 'Maria', '1979-4-11', 'F', 'lupescumaria@gamil.com', '0757288153', 'Strada Borsa 27')
+
+
+
+
+INSERT INTO TUTORE VALUES ('Mocanu', 'Ovidiu', '1974-4-10', 'M', 'mocanuovidiu@gamil.com', '0710485033', 'Bulevardul Dimitrie Cantemir 9')
+INSERT INTO TUTORE VALUES ('Mocanu', 'Maria', '1972-6-24', 'F', 'mocanumaria@gamil.com', '0736547554', 'Bulevardul Dimitrie Cantemir 9')
+
+
+
+
+INSERT INTO TUTORE VALUES ('Catargiu', 'Bogdan', '1972-7-3', 'M', 'catargiubogdan@gamil.com', '0758776122', 'Intrarea Torentului, nr 17')
+INSERT INTO TUTORE VALUES ('Catargiu', 'Andreea', '1977-7-22', 'F', 'catargiuandreea@gamil.com', '0772777252', 'Intrarea Torentului, nr 17')
+
+
+
+
+INSERT INTO TUTORE VALUES ('Rusu', 'Alin', '1971-12-7', 'M', 'rusualin@gamil.com', '0785561874', 'Bulevardul Iuliu Maniu 12')
+INSERT INTO TUTORE VALUES ('Rusu', 'Andreea', '1977-8-12', 'F', 'rusuandreea@gamil.com', '0712332081', 'Bulevardul Iuliu Maniu 12')
+
+
+
+
+INSERT INTO TUTORE VALUES ('Presecan', 'Bogdan', '1971-2-22', 'M', 'presecanbogdan@gamil.com', '0762265256', 'Strada Turnu Magurele 9')
+INSERT INTO TUTORE VALUES ('Presecan', 'Ioana', '1973-7-11', 'F', 'presecanioana@gamil.com', '0766862245', 'Strada Turnu Magurele 9')
+
+
+
+
+INSERT INTO TUTORE VALUES ('Barbu', 'Costache', '1977-5-14', 'M', 'barbucostache@gamil.com', '0720265222', 'Strada Sfantul Stefan 13')
+INSERT INTO TUTORE VALUES ('Barbu', 'Cosmina', '1978-3-5', 'F', 'barbucosmina@gamil.com', '0788404364', 'Strada Sfantul Stefan 13')
+
+
+
+
+INSERT INTO TUTORE VALUES ('Toma', 'Gheorghe', '1977-5-4', 'M', 'tomagheorghe@gamil.com', '0762553811', 'Bulevardul Dinicu Golescu 38')
+INSERT INTO TUTORE VALUES ('Toma', 'Maria', '1974-6-18', 'F', 'tomamaria@gamil.com', '0711313054', 'Bulevardul Dinicu Golescu 38')
+
+
+
+
+INSERT INTO TUTORE VALUES ('Lungu', 'Viorel', '1971-4-14', 'M', 'lunguviorel@gamil.com', '0756427408', 'Bulevardul Dimitrie Cantemir 9')
+INSERT INTO TUTORE VALUES ('Lungu', 'Maria', '1973-9-22', 'F', 'lungumaria@gamil.com', '0713317066', 'Bulevardul Dimitrie Cantemir 9')
+
+
+
+
+INSERT INTO TUTORE VALUES ('Bogoescu', 'Lucian', '1977-1-22', 'M', 'bogoesculucian@gamil.com', '0731264252', 'Piata Romana 9')
+INSERT INTO TUTORE VALUES ('Bogoescu', 'Ana', '1974-1-16', 'F', 'bogoescuana@gamil.com', '0754025834', 'Piata Romana 9')
+
+
+
+
+INSERT INTO TUTORE VALUES ('Rotaru', 'Gheorghe', '1977-12-27', 'M', 'rotarugheorghe@gamil.com', '0763355722', 'Intrarea Torentului, nr 17')
+INSERT INTO TUTORE VALUES ('Rotaru', 'Silvia', '1971-12-22', 'F', 'rotarusilvia@gamil.com', '0740781040', 'Intrarea Torentului, nr 17')
+
+
+
+
+INSERT INTO TUTORE VALUES ('Nica', 'Mircea', '1971-8-7', 'M', 'nicamircea@gamil.com', '0787642480', 'Bulevardul Iuliu Maniu 12')
+INSERT INTO TUTORE VALUES ('Nica', 'Mihaela', '1976-5-25', 'F', 'nicamihaela@gamil.com', '0716502612', 'Bulevardul Iuliu Maniu 12')
+
+
+
+
+INSERT INTO TUTORE VALUES ('Dobre', 'Razvan', '1977-6-4', 'M', 'dobrerazvan@gamil.com', '0744746762', 'Strada Turnu Magurele 9')
+INSERT INTO TUTORE VALUES ('Dobre', 'Ioana', '1976-11-6', 'F', 'dobreioana@gamil.com', '0742331862', 'Strada Turnu Magurele 9')
+
+
+
+
+INSERT INTO TUTORE VALUES ('Dinescu', 'Manuel', '1975-7-25', 'M', 'dinescumanuel@gamil.com', '0752805330', 'Strada Sfantul Stefan 13')
+INSERT INTO TUTORE VALUES ('Dinescu', 'Silvia', '1974-11-8', 'F', 'dinescusilvia@gamil.com', '0765385738', 'Strada Sfantul Stefan 13')
+
+
+
+
+INSERT INTO TUTORE VALUES ('Codreanu', 'Gheorghe', '1974-9-2', 'M', 'codreanugheorghe@gamil.com', '0762683603', 'Bulevardul Dinicu Golescu 38')
+INSERT INTO TUTORE VALUES ('Codreanu', 'Ioana', '1971-8-19', 'F', 'codreanuioana@gamil.com', '0786611783', 'Bulevardul Dinicu Golescu 38')
+
+
+
+INSERT INTO TUTORE VALUES ('Draghici', 'Ovidiu', '1975-9-1', 'M', 'draghiciovidiu@gamil.com', '0787381860', 'Calea Grivitei 19')
+INSERT INTO TUTORE VALUES ('Draghici', 'Maria', '1974-5-13', 'F', 'draghicimaria@gamil.com', '0731474763', 'Calea Grivitei 19')
+
+
+
+
+INSERT INTO TUTORE VALUES ('Neagoe', 'Horia', '1978-4-14', 'M', 'neagoehoria@gamil.com', '0782837514', 'Strada Vasile Lascar 5')
+INSERT INTO TUTORE VALUES ('Neagoe', 'Ana', '1972-4-11', 'F', 'neagoeana@gamil.com', '0700236064', 'Strada Vasile Lascar 5')
+
+
+
+
+INSERT INTO TUTORE VALUES ('Hanganu', 'Costache', '1974-3-27', 'M', 'hanganucostache@gamil.com', '0721761327', 'Strada Valea Oltului 31')
+INSERT INTO TUTORE VALUES ('Hanganu', 'Dana', '1974-12-27', 'F', 'hanganudana@gamil.com', '0703118408', 'Strada Valea Oltului 31')
+
+
+
+
+INSERT INTO TUTORE VALUES ('Nicolescu', 'Bogdan', '1973-10-23', 'M', 'nicolescubogdan@gamil.com', '0711734368', ' Strada Fizicienilor 14')
+INSERT INTO TUTORE VALUES ('Nicolescu', 'Dana', '1979-12-26', 'F', 'nicolescudana@gamil.com', '0756380854', ' Strada Fizicienilor 14')
+
+
+
+
+
+INSERT INTO TUTORE VALUES ('Ianculescu', 'Viorel', '1976-3-2', 'M', 'ianculescuviorel@gamil.com', '0705421372', 'Bulevardul Timisoara 4')
+INSERT INTO TUTORE VALUES ('Ianculescu', 'Antonia', '1971-12-21', 'F', 'ianculescuantonia@gamil.com', '0783888752', 'Bulevardul Timisoara 4')
+
+
+
+
+INSERT INTO TUTORE VALUES ('Marin', 'Lucian', '1974-12-13', 'M', 'marinlucian@gamil.com', '0701221221', 'Soseaua Pantelimon 25')
+INSERT INTO TUTORE VALUES ('Marin', 'Florina', '1976-5-11', 'F', 'marinflorina@gamil.com', '0762222546', 'Soseaua Pantelimon 25')
+
+
+
+
+INSERT INTO TUTORE VALUES ('Tanase', 'Gheorghe', '1976-12-1', 'M', 'tanasegheorghe@gamil.com', '0762354447', 'Strada Gen. Gheorghe Manu 2')
+INSERT INTO TUTORE VALUES ('Tanase', 'Ana', '1973-4-10', 'F', 'tanaseana@gamil.com', '0742334164', 'Strada Gen. Gheorghe Manu 2')
+
+
+
+
+.........................................................EVIDENTA_TUTORE....................................................................
+
+
+CREATE TABLE EVIDENTA_TUTORE(COD_TUTORE INT CONSTRAINT PK_EVIDENTA_TUTORE REFERENCES TUTORE(COD_TUTORE), COD_ELEV INT CONSTRAINT PK_EVIDENTA_ELEV REFERENCES ELEV(COD_ELEV), CONSTRAINT PK_COMPUS_EVIDENTA_TUTORE PRIMARY KEY (COD_TUTORE, COD_ELEV))
+
+
+INSERT INTO EVIDENTA_TUTORE VALUES (74, 39)
+
+INSERT INTO EVIDENTA_TUTORE VALUES (73, 39)
+
+INSERT INTO EVIDENTA_TUTORE VALUES (80, 43)
+
+INSERT INTO EVIDENTA_TUTORE VALUES (79, 43)
+
+INSERT INTO EVIDENTA_TUTORE VALUES (46, 24)
+
+INSERT INTO EVIDENTA_TUTORE VALUES (45, 24)
+
+INSERT INTO EVIDENTA_TUTORE VALUES (61, 32)
+
+INSERT INTO EVIDENTA_TUTORE VALUES (62, 32)
+
+INSERT INTO EVIDENTA_TUTORE VALUES (68, 36)
+
+INSERT INTO EVIDENTA_TUTORE VALUES (67, 36)
+
+INSERT INTO EVIDENTA_TUTORE VALUES (89, 48)
+
+INSERT INTO EVIDENTA_TUTORE VALUES (90, 48)
+
+INSERT INTO EVIDENTA_TUTORE VALUES (15, 8)
+
+INSERT INTO EVIDENTA_TUTORE VALUES (16, 8)
+
+INSERT INTO EVIDENTA_TUTORE VALUES (5, 3)
+
+INSERT INTO EVIDENTA_TUTORE VALUES (6, 3)
+
+INSERT INTO EVIDENTA_TUTORE VALUES (49, 26)
+
+INSERT INTO EVIDENTA_TUTORE VALUES (50, 26)
+
+INSERT INTO EVIDENTA_TUTORE VALUES (87, 47)
+
+INSERT INTO EVIDENTA_TUTORE VALUES (88, 47)
+
+INSERT INTO EVIDENTA_TUTORE VALUES (86, 46)
+
+INSERT INTO EVIDENTA_TUTORE VALUES (85, 46)
+
+INSERT INTO EVIDENTA_TUTORE VALUES (92, 50)
+
+INSERT INTO EVIDENTA_TUTORE VALUES (91, 50)
+
+INSERT INTO EVIDENTA_TUTORE VALUES (56, 29)
+
+INSERT INTO EVIDENTA_TUTORE VALUES (55, 29)
+
+INSERT INTO EVIDENTA_TUTORE VALUES (53, 28)
+
+INSERT INTO EVIDENTA_TUTORE VALUES (54, 28)
+
+INSERT INTO EVIDENTA_TUTORE VALUES (95, 52)
+
+INSERT INTO EVIDENTA_TUTORE VALUES (96, 52)
+
+INSERT INTO EVIDENTA_TUTORE VALUES (17, 9)
+
+INSERT INTO EVIDENTA_TUTORE VALUES (18, 9)
+
+INSERT INTO EVIDENTA_TUTORE VALUES (21, 11)
+
+INSERT INTO EVIDENTA_TUTORE VALUES (22, 11)
+
+INSERT INTO EVIDENTA_TUTORE VALUES (20, 10)
+
+INSERT INTO EVIDENTA_TUTORE VALUES (19, 10)
+
+INSERT INTO EVIDENTA_TUTORE VALUES (100, 55)
+
+INSERT INTO EVIDENTA_TUTORE VALUES (99, 55)
+
+INSERT INTO EVIDENTA_TUTORE VALUES (7, 4)
+
+INSERT INTO EVIDENTA_TUTORE VALUES (8, 4)
+
+INSERT INTO EVIDENTA_TUTORE VALUES (30, 16)
+
+INSERT INTO EVIDENTA_TUTORE VALUES (29, 16)
+
+INSERT INTO EVIDENTA_TUTORE VALUES (78, 42)
+
+INSERT INTO EVIDENTA_TUTORE VALUES (79, 42)
+
+INSERT INTO EVIDENTA_TUTORE VALUES (63, 49)
+
+INSERT INTO EVIDENTA_TUTORE VALUES (63, 33)
+
+INSERT INTO EVIDENTA_TUTORE VALUES (63, 14)
+
+INSERT INTO EVIDENTA_TUTORE VALUES (64, 49)
+
+INSERT INTO EVIDENTA_TUTORE VALUES (64, 33)
+
+INSERT INTO EVIDENTA_TUTORE VALUES (64, 14)
+
+INSERT INTO EVIDENTA_TUTORE VALUES (102, 56)
+
+INSERT INTO EVIDENTA_TUTORE VALUES (101, 56)
+
+INSERT INTO EVIDENTA_TUTORE VALUES (34, 18)
+
+INSERT INTO EVIDENTA_TUTORE VALUES (33, 18)
+
+INSERT INTO EVIDENTA_TUTORE VALUES (11, 6)
+
+INSERT INTO EVIDENTA_TUTORE VALUES (12, 6)
+
+INSERT INTO EVIDENTA_TUTORE VALUES (66, 35)
+
+INSERT INTO EVIDENTA_TUTORE VALUES (66, 34)
+
+INSERT INTO EVIDENTA_TUTORE VALUES (65, 35)
+
+INSERT INTO EVIDENTA_TUTORE VALUES (65, 34)
+
+INSERT INTO EVIDENTA_TUTORE VALUES (32, 17)
+
+INSERT INTO EVIDENTA_TUTORE VALUES (31, 17)
+
+INSERT INTO EVIDENTA_TUTORE VALUES (14, 7)
+
+INSERT INTO EVIDENTA_TUTORE VALUES (13, 7)
+
+INSERT INTO EVIDENTA_TUTORE VALUES (4, 2)
+
+INSERT INTO EVIDENTA_TUTORE VALUES (3, 2)
+
+INSERT INTO EVIDENTA_TUTORE VALUES (94, 51)
+
+INSERT INTO EVIDENTA_TUTORE VALUES (93, 51)
+
+INSERT INTO EVIDENTA_TUTORE VALUES (44, 23)
+
+INSERT INTO EVIDENTA_TUTORE VALUES (43, 23)
+
+INSERT INTO EVIDENTA_TUTORE VALUES (26, 13)
+
+INSERT INTO EVIDENTA_TUTORE VALUES (25, 13)
+
+INSERT INTO EVIDENTA_TUTORE VALUES (84, 45)
+
+INSERT INTO EVIDENTA_TUTORE VALUES (83, 45)
+
+INSERT INTO EVIDENTA_TUTORE VALUES (97, 53)
+
+INSERT INTO EVIDENTA_TUTORE VALUES (98, 53)
+
+INSERT INTO EVIDENTA_TUTORE VALUES (36, 19)
+
+INSERT INTO EVIDENTA_TUTORE VALUES (35, 19)
+
+INSERT INTO EVIDENTA_TUTORE VALUES (40, 21)
+
+INSERT INTO EVIDENTA_TUTORE VALUES (39, 21)
+
+INSERT INTO EVIDENTA_TUTORE VALUES (41, 22)
+
+INSERT INTO EVIDENTA_TUTORE VALUES (42, 22)
+
+INSERT INTO EVIDENTA_TUTORE VALUES (28, 15)
+
+INSERT INTO EVIDENTA_TUTORE VALUES (27, 15)
+
+INSERT INTO EVIDENTA_TUTORE VALUES (71, 38)
+
+INSERT INTO EVIDENTA_TUTORE VALUES (72, 38)
+
+INSERT INTO EVIDENTA_TUTORE VALUES (52, 27)
+
+INSERT INTO EVIDENTA_TUTORE VALUES (51, 27)
+
+INSERT INTO EVIDENTA_TUTORE VALUES (47, 25)
+
+INSERT INTO EVIDENTA_TUTORE VALUES (48, 25)
+
+INSERT INTO EVIDENTA_TUTORE VALUES (58, 30)
+
+INSERT INTO EVIDENTA_TUTORE VALUES (57, 30)
+
+INSERT INTO EVIDENTA_TUTORE VALUES (81, 44)
+
+INSERT INTO EVIDENTA_TUTORE VALUES (82, 44)
+
+INSERT INTO EVIDENTA_TUTORE VALUES (69, 37)
+
+INSERT INTO EVIDENTA_TUTORE VALUES (70, 37)
+
+INSERT INTO EVIDENTA_TUTORE VALUES (2, 1)
+
+INSERT INTO EVIDENTA_TUTORE VALUES (1, 1)
+
+INSERT INTO EVIDENTA_TUTORE VALUES (104, 57)
+
+INSERT INTO EVIDENTA_TUTORE VALUES (103, 57)
+
+INSERT INTO EVIDENTA_TUTORE VALUES (75, 40)
+
+INSERT INTO EVIDENTA_TUTORE VALUES (76, 40)
+
+INSERT INTO EVIDENTA_TUTORE VALUES (10, 54)
+
+INSERT INTO EVIDENTA_TUTORE VALUES (10, 5)
+
+INSERT INTO EVIDENTA_TUTORE VALUES (9, 54)
+
+INSERT INTO EVIDENTA_TUTORE VALUES (9, 5)
+
+INSERT INTO EVIDENTA_TUTORE VALUES (38, 20)
+
+INSERT INTO EVIDENTA_TUTORE VALUES (37, 20)
+
+INSERT INTO EVIDENTA_TUTORE VALUES (59, 31)
+
+INSERT INTO EVIDENTA_TUTORE VALUES (60, 31)
+
+INSERT INTO EVIDENTA_TUTORE VALUES (24, 12)
+
+INSERT INTO EVIDENTA_TUTORE VALUES (23, 12)
+
+
+
+
+...........................................................CONCURS.......................................................................
+
+
+CREATE TABLE CONCURS(COD_CONCURS INT IDENTITY(1,1) CONSTRAINT PKEY_CONCURS PRIMARY KEY, DENUMIRE VARCHAR(50) CONSTRAINT DENUMIRE_CONCURS NOT NULL, DISCIPLINA VARCHAR(30) CONSTRAINT DISIPLINA_CONCURS NOT NULL, DATA_DESFASURARE DATE CONSTRAINT DATA_CONCURS NOT NULL, COD_PREMIU INT , CONSTRAINT FK_CONCURS_PREMIU FOREIGN KEY (COD_PREMIU) REFERENCES PREMIU(COD_PREMIU), COD_CLUB INT, CONSTRAINT FK_CONCURS_CLUB FOREIGN KEY (COD_CLUB) REFERENCES CLUB(COD_CLUB))
+
+
+
+INSERT INTO CONCURS VALUES ('Gazeta Matematicii clasa I', 'Matematica', '2022-05-22', 15, 1)
+
+INSERT INTO CONCURS VALUES ('Matematica aplicata', 'Matematica', '2022-03-25', 1, 4)
+
+INSERT INTO CONCURS VALUES ('Literatura in Dar', 'Limba si Literatura Romana', '2022-04-17', 16, 8)
+
+INSERT INTO CONCURS VALUES ('Literatura ca Arta', 'Limba si Literatura Romana', '2022-04-17', 17, 8)
+
+INSERT INTO CONCURS VALUES ('Reading Contest', 'Limba Engleza', '2022-04-10', 3, 5)
+
+INSERT INTO CONCURS VALUES ('Campionatul de Fotbal', 'Educatie Fizica si Sport', '2022-06-2', 2, 6)
+
+INSERT INTO CONCURS VALUES ('INFO Mcip', 'Informatica', '2022-05-2', 5, 3)
+
+INSERT INTO CONCURS VALUES ('Arta si Pictura', 'Educatie PLastica', '2022-05-7', 6, 7)
+
+INSERT INTO CONCURS VALUES ('Chimia Aplicata', 'Chimie', '2022-03-17', 4, 9)
+
+INSERT INTO CONCURS VALUES ('Limba Romana Cangurul', 'Limba si Literatura Romana', '2022-05-20', 18, 2)
+
+
+
+
+...........................................................PARTICIPA_CONCURS.............................................................
+
+
+CREATE TABLE PARTICIPA_CONCURS(COD_ELEV INT CONSTRAINT PK_PARTICIPA_ELEV REFERENCES ELEV(COD_ELEV), COD_CONCURS INT CONSTRAINT PK_PARTICIPA_CONCURS REFERENCES CONCURS(COD_CONCURS), CONSTRAINT PK_COMPUS_PARTICIPA_CONCURS PRIMARY KEY (COD_ELEV, COD_CONCURS), PUNCTAJ FLOAT CONSTRAINT PUNCTAJ_CONCURS NOT NULL)
+
+
+INSERT INTO PARTICIPA_CONCURS VALUES (1, 1, 75.25)
+
+INSERT INTO PARTICIPA_CONCURS VALUES (2, 1, 86.50)
+
+INSERT INTO PARTICIPA_CONCURS VALUES (8, 1, 94.25)
+
+INSERT INTO PARTICIPA_CONCURS VALUES (10, 1, 100)
+
+INSERT INTO PARTICIPA_CONCURS VALUES (14, 1, 65.90)
+
+
+
+
+INSERT INTO PARTICIPA_CONCURS VALUES (33, 2, 89.40)
+
+INSERT INTO PARTICIPA_CONCURS VALUES (37, 2, 85.25)
+
+INSERT INTO PARTICIPA_CONCURS VALUES (39, 2, 93.20)
+
+INSERT INTO PARTICIPA_CONCURS VALUES (40, 2, 97.50)
+
+
+
+
+INSERT INTO PARTICIPA_CONCURS VALUES (44, 3, 60.25)
+
+INSERT INTO PARTICIPA_CONCURS VALUES (45, 3, 89.90)
+
+INSERT INTO PARTICIPA_CONCURS VALUES (47, 3, 75.25)
+
+INSERT INTO PARTICIPA_CONCURS VALUES (51, 3, 95.75)
+
+INSERT INTO PARTICIPA_CONCURS VALUES (52, 3, 100)
+
+
+
+
+INSERT INTO PARTICIPA_CONCURS VALUES (42, 4, 89.25)
+
+INSERT INTO PARTICIPA_CONCURS VALUES (43, 4, 90)
+
+INSERT INTO PARTICIPA_CONCURS VALUES (48, 4, 100)
+
+INSERT INTO PARTICIPA_CONCURS VALUES (50, 4, 82.50)
+
+INSERT INTO PARTICIPA_CONCURS VALUES (53, 4, 80)
+
+
+
+
+
+INSERT INTO PARTICIPA_CONCURS VALUES (45, 5, 75.5)
+
+INSERT INTO PARTICIPA_CONCURS VALUES (44, 5, 80)
+
+INSERT INTO PARTICIPA_CONCURS VALUES (47, 5, 90)
+
+
+
+INSERT INTO PARTICIPA_CONCURS VALUES (10, 7, 83.25)
+
+INSERT INTO PARTICIPA_CONCURS VALUES (13, 7, 76.50)
+
+INSERT INTO PARTICIPA_CONCURS VALUES (14, 7, 90)
+
+INSERT INTO PARTICIPA_CONCURS VALUES (17, 7, 89.50)
+
+INSERT INTO PARTICIPA_CONCURS VALUES (23, 7, 96.40)
+
+INSERT INTO PARTICIPA_CONCURS VALUES (26, 7, 95.30)
+
+INSERT INTO PARTICIPA_CONCURS VALUES (30, 7, 97)
+
+
+
+INSERT INTO PARTICIPA_CONCURS VALUES (47, 8, 70.50)
+
+INSERT INTO PARTICIPA_CONCURS VALUES (48, 8, 85.30)
+
+INSERT INTO PARTICIPA_CONCURS VALUES (56, 8, 90.15)
+
+INSERT INTO PARTICIPA_CONCURS VALUES (57, 8, 89.90)
+
+
+
+INSERT INTO PARTICIPA_CONCURS VALUES (51, 9, 90)
+
+INSERT INTO PARTICIPA_CONCURS VALUES (53, 9, 89.50)
+
+INSERT INTO PARTICIPA_CONCURS VALUES (54, 9, 94.50)
+
+INSERT INTO PARTICIPA_CONCURS VALUES (56, 9, 100)
+
+
+
+..........................................................CLUB..........................................................................
+
+
+CREATE TABLE CLUB (COD_CLUB INT IDENTITY(1,1) CONSTRAINT PKEY PRIMARY KEY, DENUMIRE VARCHAR(50) CONSTRAINT DENUMIRE_CLUB NOT NULL,  COD_CADRU_DIDACTIC INT, CONSTRAINT FK_CLUB FOREIGN KEY(COD_CADRU_DIDACTIC) REFERENCES CADRU_DIDACTIC(COD_CADRU_DIDACTIC))
+
+INSERT INTO CLUB VALUES ('Cercul de Matematica', 20)
+
+INSERT INTO CLUB VALUES ('Cercul de Limba si Literatura Romana', 16)
+
+INSERT INTO CLUB VALUES ('Cercul de Informatica', 17)
+
+INSERT INTO CLUB VALUES ('Aplicatii ale Matematicii in viata cotidiana', 17)
+
+INSERT INTO CLUB VALUES ('English Reading Club', 21)
+
+INSERT INTO CLUB VALUES ('Clubul de Fotbal', 25)
+
+INSERT INTO CLUB VALUES ('Clubul de Arta', 24)
+
+INSERT INTO CLUB VALUES ('Cercul de Literatura si Vocabular', 22)
+
+INSERT INTO CLUB VALUES ('Cercul de Chimie', '15')
+
+
+
+
+..............................................................INSCRIERE_CLUB.............................................................
+
+
+CREATE TABLE INSCRIERE_CLUB(COD_CLUB INT CONSTRAINT PK_INSCRIERE_CLUB REFERENCES CLUB(COD_CLUB), COD_ELEV INT CONSTRAINT PK_INSCRIERE_ELEV REFERENCES ELEV(COD_ELEV), CONSTRAINT PK_COMPUS_INSCRIERE PRIMARY KEY (COD_CLUB, COD_ELEV))
+
+
+INSERT INTO INSCRIERE_CLUB VALUES (1, 1)
+
+INSERT INTO INSCRIERE_CLUB VALUES (1, 2)
+
+INSERT INTO INSCRIERE_CLUB VALUES (1, 7)
+
+INSERT INTO INSCRIERE_CLUB VALUES (1, 8)
+
+INSERT INTO INSCRIERE_CLUB VALUES (1, 10)
+
+INSERT INTO INSCRIERE_CLUB VALUES (1, 12)
+
+INSERT INTO INSCRIERE_CLUB VALUES (1, 14)
+
+
+
+
+INSERT INTO INSCRIERE_CLUB VALUES (2, 33)
+
+INSERT INTO INSCRIERE_CLUB VALUES (2, 37)
+
+INSERT INTO INSCRIERE_CLUB VALUES (2, 39)
+
+INSERT INTO INSCRIERE_CLUB VALUES (2, 40)
+
+
+
+
+INSERT INTO INSCRIERE_CLUB VALUES (3, 42)
+
+INSERT INTO INSCRIERE_CLUB VALUES (3, 44)
+
+INSERT INTO INSCRIERE_CLUB VALUES (3, 45)
+
+INSERT INTO INSCRIERE_CLUB VALUES (3, 47)
+
+INSERT INTO INSCRIERE_CLUB VALUES (3, 49)
+
+INSERT INTO INSCRIERE_CLUB VALUES (3, 51)
+
+INSERT INTO INSCRIERE_CLUB VALUES (3, 52)
+
+INSERT INTO INSCRIERE_CLUB VALUES (3, 54)
+
+
+
+INSERT INTO INSCRIERE_CLUB VALUES (4, 42)
+
+INSERT INTO INSCRIERE_CLUB VALUES (4, 43)
+
+INSERT INTO INSCRIERE_CLUB VALUES (4, 46)
+
+INSERT INTO INSCRIERE_CLUB VALUES (4, 48)
+
+INSERT INTO INSCRIERE_CLUB VALUES (4, 49)
+
+INSERT INTO INSCRIERE_CLUB VALUES (4, 50)
+
+INSERT INTO INSCRIERE_CLUB VALUES (4, 53)
+
+INSERT INTO INSCRIERE_CLUB VALUES (4, 54)
+
+
+
+
+
+INSERT INTO INSCRIERE_CLUB VALUES (5, 45)
+
+INSERT INTO INSCRIERE_CLUB VALUES (5, 44)
+
+INSERT INTO INSCRIERE_CLUB VALUES (5, 47)
+
+
+
+
+INSERT INTO INSCRIERE_CLUB VALUES (6, 33)
+
+INSERT INTO INSCRIERE_CLUB VALUES (6, 34)
+
+INSERT INTO INSCRIERE_CLUB VALUES (6, 35)
+
+INSERT INTO INSCRIERE_CLUB VALUES (6, 42)
+
+INSERT INTO INSCRIERE_CLUB VALUES (6, 43)
+
+INSERT INTO INSCRIERE_CLUB VALUES (6, 36)
+
+
+
+INSERT INTO INSCRIERE_CLUB VALUES (7, 10)
+
+INSERT INTO INSCRIERE_CLUB VALUES (7, 12)
+
+INSERT INTO INSCRIERE_CLUB VALUES (7, 13)
+
+INSERT INTO INSCRIERE_CLUB VALUES (7, 14)
+
+INSERT INTO INSCRIERE_CLUB VALUES (7, 15)
+
+INSERT INTO INSCRIERE_CLUB VALUES (7, 17)
+
+INSERT INTO INSCRIERE_CLUB VALUES (7, 23)
+
+INSERT INTO INSCRIERE_CLUB VALUES (7, 26)
+
+INSERT INTO INSCRIERE_CLUB VALUES (7, 30)
+
+INSERT INTO INSCRIERE_CLUB VALUES (7, 31)
+
+
+
+
+INSERT INTO INSCRIERE_CLUB VALUES (8, 47)
+
+INSERT INTO INSCRIERE_CLUB VALUES (8, 48)
+
+INSERT INTO INSCRIERE_CLUB VALUES (8, 49)
+
+INSERT INTO INSCRIERE_CLUB VALUES (8, 56)
+
+INSERT INTO INSCRIERE_CLUB VALUES (8, 57)
+
+
+
+INSERT INTO INSCRIERE_CLUB VALUES (9, 51)
+
+INSERT INTO INSCRIERE_CLUB VALUES (9, 53)
+
+INSERT INTO INSCRIERE_CLUB VALUES (9, 54)
+
+INSERT INTO INSCRIERE_CLUB VALUES (9, 56)
+
+
+
+
+................................................................PREMIU....................................................................
+
+
+CREATE TABLE PREMIU(COD_PREMIU INT IDENTITY(1,1) CONSTRAINT PKEY_PREMIU PRIMARY KEY, DENUMIRE VARCHAR(30) CONSTRAINT DENUMIRE_PREMIU NOT NULL, DESCRIERE VARCHAR(70) CONSTRAINT DESCRIERE_PREMIU NOT NULL)
+
+
+
+INSERT INTO PREMIU VALUES ('Culegere Excelenta', 'Culegere cu probleme de matematica extrase din olimpiade')
+
+INSERT INTO PREMIU VALUES ('Red Rising Saga', 'Colectia de carti din seria Red Rising, de Pierce Brown')
+
+INSERT INTO PREMIU VALUES ('Trusa EXP-Chemistry', 'Trusa cu reactivi pentru experimente de chimie in gimnaziu') 
+
+INSERT INTO PREMIU VALUES ('Apple iPad Pro 11', 'Tableta iPad Pro 11", 256GB, WI-FI, Silver')
+
+INSERT INTO PREMIU VALUES ('Trusa Art&Craft', 'Trusa de pictura si sketching')
+
+INSERT INTO PREMIU VALUES ('Gazeta Matematicii Colectie', 'Colectie de probleme date la Gazeta Matematicii in decursul anului')
+
+INSERT INTO PREMIU VALUES ('Pachet F.M. Dostoievski', 'Colectie de romane ale autorului Dostoievski')
+
+INSERT INTO PREMIU VALUES ('Pachet Jules Vernes', 'Colectie 5 volume Jules Vernes')
+
+INSERT INTO PREMIU VALUES ('Pachet Harry Potter', 'Colectie volume Harry Potter')
+
+
+
+
+...............................................................CADRU_DIDACTIC..............................................................
+
+
+CREATE TABLE CADRU_DIDACTIC (COD_CADRU_DIDACTIC INT IDENTITY(1,1) CONSTRAINT PKEY_CADRU_DIDACTIC PRIMARY KEY, NUME VARCHAR(100) CONSTRAINT NUME_CADRU_DIDACTIC NOT NULL,  PRENUME VARCHAR(100) CONSTRAINT PRENUME_CADRU_DIDACTIC NOT NULL, MAIL VARCHAR(75) UNIQUE CONSTRAINT MAIL_CADRU_DIDACTIC NOT NULL, NUMAR_TELEFON VARCHAR(20) UNIQUE CONSTRAINT TELEFON_CADRU_DIDACTIC NOT NULL, ADRESA VARCHAR(100) CONSTRAINT ADRESA_CADRU_DIDACTIC NOT NULL, SEX VARCHAR(10) CONSTRAINT SEX_CONST NOT NULL, SPECIALIZARE VARCHAR(30) CONSTRAINT SPECIALIZARE_CADRU_DIDACTIC NOT NULL, SALARIU INT CONSTRAINT SALARIU_CADRU_DIDACTIC NOT NULL)
+
+
+INSERT INTO CADRU_DIDACTIC VALUES ('Popescu', 'Ion', 'popescuion@gamil.com', '0766672456', 'Strada Iuliu Maniu 4', 'M', 'Chimie-Fizica', 2300)
+
+INSERT INTO CADRU_DIDACTIC VALUES ('Avram', 'Ana', 'avramana@gamil.com', '0719374889', 'Calea Victoriei 63', 'F', 'Invatator', 2000)
+
+INSERT INTO CADRU_DIDACTIC VALUES ('Moise', 'Andrei', 'moiseandrei@gamil.com', '0702678090', 'Strada Smardan 37', 'M', 'Matematica-Informatica', 3000)
+
+INSERT INTO CADRU_DIDACTIC VALUES ('Sima', 'Eugen', 'simaeugen@gamil.com', '0745122343', 'Piata Presei Libere 3', 'M', 'Istorie', 2500)
+
+INSERT INTO CADRU_DIDACTIC VALUES ('Enache', 'Alex', 'enachealex@gamil.com', '0734685654', 'Strada Valea Argesului 12', 'M', 'Geografie', 2500)
+
+INSERT INTO CADRU_DIDACTIC VALUES ('Ivan', 'Andreea', 'ivanandreea@gamil.com', '0734545645', 'Strada Ion Campineanu 22', 'F', 'Invatator', 2100)
+
+INSERT INTO CADRU_DIDACTIC VALUES ('Popa', 'Maria', 'popamaria@gamil.com', '0735325755', 'Strada Sfantul Stefan 17', 'F', 'Limba Engleza', 2700)
+
+INSERT INTO CADRU_DIDACTIC VALUES ('Ionescu', 'Alex', 'ionescualex@gamil.com', '0735249078', 'Strada Boteanu 1', 'M', 'Limba si Literatura Romana', 2900)
+
+INSERT INTO CADRU_DIDACTIC VALUES ('Rosu', 'Carmen', 'rosucarmen@gamil.com', '0734254644', 'Calea Plevnei 15', 'F', 'Biologie', 2600)
+
+INSERT INTO CADRU_DIDACTIC VALUES ('Petre', 'Ion', 'petreion@gamil.com', '0734652752', 'Bulevardul Unirii 64', 'M', 'Educatie Plastica', 2400)
+
+INSERT INTO CADRU_DIDACTIC VALUES ('Vicentiu', 'Florin', 'vicentiuflorin@gamil.com', '0734634792', 'Bulevardul Timisoara 12', 'M', 'Educatie Fizica si Sport', 2600)
+
+
+
+
+....................................................................MATERIE.......................................................................................
+
+
+
+CREATE TABLE MATERIE (COD_MATERIE INT IDENTITY(1,1) CONSTRAINT PKEY_MATERIE PRIMARY KEY, DENUMIRE VARCHAR(30) CONSTRAINT DENUMIRE_MATERIE NOT NULL)
+
+
+INSERT INTO MATERIE VALUES ('Matematica')
+
+INSERT INTO MATERIE VALUES ('Limba si Literatura Romana')
+
+INSERT INTO MATERIE VALUES ('Limba Engleza')
+
+INSERT INTO MATERIE VALUES ('Istorie')
+
+INSERT INTO MATERIE VALUES ('Geografie')
+
+INSERT INTO MATERIE VALUES ('Educatie Fizica si Sport')
+
+INSERT INTO MATERIE VALUES ('Educatie Plastica')
+
+INSERT INTO MATERIE VALUES ('Biologie')
+
+
+
+.......................................................................EVALUARE...............................................................................
+
+
+CREATE TABLE EVALUARE(COD_EVALUARE INT IDENTITY(1,1) CONSTRAINT PKEY_EVALUARE PRIMARY KEY, MODALITATE VARCHAR(50) CONSTRAINT MODALITATE_EVALUARE NOT NULL, COD_MATERIE INT, CONSTRAINT FK_EVALUARE FOREIGN KEY (COD_MATERIE) REFERENCES MATERIE(COD_MATERIE))
+
+
+INSERT INTO EVALUARE VALUES ('test', 1)
+
+INSERT INTO EVALUARE VALUES ('test', 2)
+
+INSERT INTO EVALUARE VALUES ('test', 2)
+
+INSERT INTO EVALUARE VALUES ('evaluare orala', 2)
+
+INSERT INTO EVALUARE VALUES ('evaluare orala', 4)
+
+INSERT INTO EVALUARE VALUES ('evaluare orala', 5)
+
+INSERT INTO EVALUARE VALUES ('test', 8)
+
+INSERT INTO EVALUARE VALUES ('test', 9)
+
+INSERT INTO EVALUARE VALUES ('test', 3)
+
+INSERT INTO EVALUARE VALUES ('evaluare orala', 2)
+
+INSERT INTO EVALUARE VALUES ('test', 10)
+
+
+
+
+......................................................................SUSTINE_EVALUARE.............................................................
+
+
+CREATE TABLE SUSTINE_EVALUARE(COD_ELEV INT CONSTRAINT PK_SUSTINE_ELEV REFERENCES ELEV(COD_ELEV), COD_EVALUARE INT CONSTRAINT PK_SUSTINE_EV REFERENCES EVALUARE(COD_EVALUARE), CONSTRAINT PK_COMPUS_SUSTINE_EVALUARE PRIMARY KEY (COD_ELEV, COD_EVALUARE))
+
+
+INSERT INTO SUSTINE_EVALUARE VALUES (50, 11, 10, '2022-04-10')
+
+INSERT INTO SUSTINE_EVALUARE VALUES (51, 11, 6, '2022-04-10')
+
+INSERT INTO SUSTINE_EVALUARE VALUES (52, 11, 7.25, '2022-04-10')
+
+INSERT INTO SUSTINE_EVALUARE VALUES (53, 11, 8, '2022-04-10')
+
+INSERT INTO SUSTINE_EVALUARE VALUES (54, 11, 8.50, '2022-04-10')
+
+INSERT INTO SUSTINE_EVALUARE VALUES (55, 11, 10, '2022-04-10')
+
+INSERT INTO SUSTINE_EVALUARE VALUES (56, 11, 9.50, '2022-04-10')
+
+INSERT INTO SUSTINE_EVALUARE VALUES (57, 11, 7.75, '2022-04-10')
+
+
+
+
+
+INSERT INTO SUSTINE_EVALUARE VALUES (50, 2, 9, '2022-05-10')
+
+INSERT INTO SUSTINE_EVALUARE VALUES (51, 2, 7, '2022-05-10')
+
+INSERT INTO SUSTINE_EVALUARE VALUES (52, 2, 8.50, '2022-05-10')
+
+INSERT INTO SUSTINE_EVALUARE VALUES (53, 2, 8, '2022-05-10')
+
+INSERT INTO SUSTINE_EVALUARE VALUES (54, 2, 9, '2022-05-10')
+
+INSERT INTO SUSTINE_EVALUARE VALUES (55, 2, 7.60, '2022-05-10')
+
+INSERT INTO SUSTINE_EVALUARE VALUES (56, 2, 9.40, '2022-05-10')
+
+INSERT INTO SUSTINE_EVALUARE VALUES (57, 2, 10, '2022-05-10')
+
+
+
+
+INSERT INTO SUSTINE_EVALUARE VALUES (42, 3, 9, '2022-05-15')
+
+INSERT INTO SUSTINE_EVALUARE VALUES (43, 3, 10, '2022-05-15')
+
+INSERT INTO SUSTINE_EVALUARE VALUES (44, 3, 8, '2022-05-15')
+
+INSERT INTO SUSTINE_EVALUARE VALUES (45, 3, 8.50, '2022-05-15')
+
+INSERT INTO SUSTINE_EVALUARE VALUES (46, 3, 9.50, '2022-05-15')
+
+INSERT INTO SUSTINE_EVALUARE VALUES (47, 3, 9.25, '2022-05-15')
+
+INSERT INTO SUSTINE_EVALUARE VALUES (48, 3, 6, '2022-05-15')
+
+INSERT INTO SUSTINE_EVALUARE VALUES (49, 3, 8, '2022-05-15')
+
+
+
+INSERT INTO SUSTINE_EVALUARE VALUES (42, 1, 8.5, '2022-04-15')
+
+INSERT INTO SUSTINE_EVALUARE VALUES (43, 1, 10, '2022-04-15')
+
+INSERT INTO SUSTINE_EVALUARE VALUES (44, 1, 9.5, '2022-04-15')
+
+INSERT INTO SUSTINE_EVALUARE VALUES (45, 1, 8.50, '2022-04-15')
+
+INSERT INTO SUSTINE_EVALUARE VALUES (46, 1, 9.50, '2022-04-15')
+
+INSERT INTO SUSTINE_EVALUARE VALUES (47, 1, 7, '2022-04-15')
+
+INSERT INTO SUSTINE_EVALUARE VALUES (48, 1, 6, '2022-05-15')
+
+INSERT INTO SUSTINE_EVALUARE VALUES (49, 1, 7, '2022-05-15')
+
+
+
+
+INSERT INTO SUSTINE_EVALUARE VALUES (50, 5, 9, '2022-03-07')
+
+INSERT INTO SUSTINE_EVALUARE VALUES (51, 5, 7, '2022-03-07')
+
+INSERT INTO SUSTINE_EVALUARE VALUES (52, 5, 8.50, '2022-03-07')
+
+INSERT INTO SUSTINE_EVALUARE VALUES (53, 5, 8, '2022-03-07')
+
+INSERT INTO SUSTINE_EVALUARE VALUES (54, 5, 9, '2022-03-07')
+
+INSERT INTO SUSTINE_EVALUARE VALUES (55, 5, 8, '2022-03-07')
+
+INSERT INTO SUSTINE_EVALUARE VALUES (56, 5, 10, '2022-03-07')
+
+INSERT INTO SUSTINE_EVALUARE VALUES (57, 5, 10, '2022-03-07')
+
+
+
+INSERT INTO SUSTINE_EVALUARE VALUES (50, 6, 10, '2022-03-09')
+
+INSERT INTO SUSTINE_EVALUARE VALUES (51, 6, 8, '2022-03-09')
+
+INSERT INTO SUSTINE_EVALUARE VALUES (52, 6, 9, '2022-03-09')
+
+INSERT INTO SUSTINE_EVALUARE VALUES (53, 6, 8.75, '2022-03-09')
+
+INSERT INTO SUSTINE_EVALUARE VALUES (54, 6, 9.50, '2022-03-09')
+
+INSERT INTO SUSTINE_EVALUARE VALUES (55, 6, 8, '2022-03-09')
+
+INSERT INTO SUSTINE_EVALUARE VALUES (56, 6, 10, '2022-03-09')
+
+INSERT INTO SUSTINE_EVALUARE VALUES (57, 6, 10, '2022-03-09')
+
+
+
+
+......................................................................SALA...................................................................
+
+
+CREATE TABLE SALA (COD_SALA INT IDENTITY(1,1) CONSTRAINT PKEY_SALA PRIMARY KEY, LOCATIE VARCHAR(30) CONSTRAINT LOCATIE_SALA NOT NULL)
+
+
+INSERT INTO SALA VALUES('Parter', NULL)
+
+INSERT INTO SALA VALUES('Parter', 'Laborator Biologie')
+
+INSERT INTO SALA VALUES('Parter', NULL)
+
+INSERT INTO SALA VALUES('Parter', 'Laborator Informatica')
+
+INSERT INTO SALA VALUES('Parter', NULL)
+
+
+
+INSERT INTO SALA VALUES('Etaj 1', 'Laborator Chimie')
+
+INSERT INTO SALA VALUES('Etaj 1', NULL)
+
+INSERT INTO SALA VALUES('Etaj 1', NULL)
+
+INSERT INTO SALA VALUES('Etaj 1', 'Laborator Fizica')
+
+INSERT INTO SALA VALUES('Etaj 1', NULL)
+
+INSERT INTO SALA VALUES('Parter', 'Sala de Sport')
+
+INSERT INTO SALA VALUES('Etaj 2', NULL)
+
+INSERT INTO SALA VALUES('Etaj 2', NULL)
+
+INSERT INTO SALA VALUES('Etaj 2', NULL)
+
+
+
+
+...........................................................................ORAR................................................................
+
+
+CREATE TABLE ORAR(COD_CLASA INT CONSTRAINT PK_ORAR_CLASA REFERENCES CLASA(COD_CLASA), COD_SALA INT CONSTRAINT PK_ORAR_SALA REFERENCES SALA(COD_SALA),COD_MATERIE INT CONSTRAINT PK_ORAR_MATERIE REFERENCES MATERIE(COD_MATERIE), COD_CADRU_DIDACTIC INT CONSTRAINT PK_ORAR_CADRU_DIDACTIC REFERENCES CADRU_DIDACTIC(COD_CADRU_DIDACTIC),CONSTRAINT PK_COMPUS_ORAR PRIMARY KEY(COD_CLASA, COD_SALA, COD_MATERIE, COD_CADRU_DIDACTIC))
+
+
+INSERT INTO ORAR VALUES (21, 1, 1, 20)
+
+INSERT INTO ORAR VALUES (21, 1, 4, 20)
+
+INSERT INTO ORAR VALUES (21, 11, 6, 25)
+
+INSERT INTO ORAR VALUES (21, 1, 7, 20)
+
+INSERT INTO ORAR VALUES (21, 1, 3, 20)
+
+
+
+INSERT INTO ORAR VALUES (22, 12, 1, 16)
+
+INSERT INTO ORAR VALUES (22, 12, 4, 16)
+
+INSERT INTO ORAR VALUES (22, 11, 6, 25)
+
+INSERT INTO ORAR VALUES (22, 12, 7, 16)
+
+INSERT INTO ORAR VALUES (22, 12, 3, 16)
+
+
+INSERT INTO ORAR VALUES (27, 7, 1, 16)
+
+INSERT INTO ORAR VALUES (27, 7, 4, 16)
+
+INSERT INTO ORAR VALUES (27, 11, 6, 25)
+
+INSERT INTO ORAR VALUES (27, 7, 7, 16)
+
+INSERT INTO ORAR VALUES (27, 7, 3, 21)
+
+
+
+INSERT INTO ORAR VALUES (28, 3, 1, 20)
+
+INSERT INTO ORAR VALUES (28, 3, 4, 20)
+
+INSERT INTO ORAR VALUES (28, 11, 6, 25)
+
+INSERT INTO ORAR VALUES (28, 3, 7, 20)
+
+INSERT INTO ORAR VALUES (28, 3, 3, 21)
+
+
+
+
+INSERT INTO ORAR VALUES (35, 5, 1, 16)
+
+INSERT INTO ORAR VALUES (35, 5, 4, 16)
+
+INSERT INTO ORAR VALUES (35, 11, 6, 25)
+
+INSERT INTO ORAR VALUES (35, 5, 7, 24)
+
+INSERT INTO ORAR VALUES (35, 5, 3, 21)
+
+
+
+INSERT INTO ORAR VALUES (42, 4, 1, 17)
+
+INSERT INTO ORAR VALUES (42, 12, 2, 22)
+
+INSERT INTO ORAR VALUES (42, 12, 4, 18)
+
+INSERT INTO ORAR VALUES (42, 12, 5, 19)
+
+INSERT INTO ORAR VALUES (42, 11, 6, 25)
+
+INSERT INTO ORAR VALUES (42, 12, 7, 24)
+
+INSERT INTO ORAR VALUES (42, 12, 3, 21)
+
+INSERT INTO ORAR VALUES (42, 2, 8, 23)
+
+INSERT INTO ORAR VALUES (42, 6, 9, 15)
+
+
+
+INSERT INTO ORAR VALUES (55, 4, 1, 17)
+
+INSERT INTO ORAR VALUES (55, 14, 2, 22)
+
+INSERT INTO ORAR VALUES (55, 14, 4, 18)
+
+INSERT INTO ORAR VALUES (55, 14, 5, 19)
+
+INSERT INTO ORAR VALUES (55, 11, 6, 25)
+
+INSERT INTO ORAR VALUES (55, 14, 7, 24)
+
+INSERT INTO ORAR VALUES (55, 14, 3, 21)
+
+INSERT INTO ORAR VALUES (55, 2, 8, 23)
+
+INSERT INTO ORAR VALUES (55, 6, 9, 15)
+
+
+
+
